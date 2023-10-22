@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     
     public float speed = 12f;
-    public float gravity = -9.81f;
+    public float gravity = -19.0f;
+    public float jumpHeight = 3.0f;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -38,6 +39,11 @@ public class PlayerMovement : MonoBehaviour
         
         // move the player
         controller.Move(move * speed * Time.deltaTime); // deltaTime makes it frame rate independent
+
+        if(Input.GetButtonDown("Jump") && isOnGround)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
 
         //update the velocity to be effected by gravity
         velocity.y += gravity * Time.deltaTime; 
