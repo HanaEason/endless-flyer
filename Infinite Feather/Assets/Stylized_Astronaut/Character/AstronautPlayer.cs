@@ -9,6 +9,8 @@ namespace AstronautPlayer
 		private Animator anim;
 		private CharacterController controller;
 
+		private CameraSwitcher cameraSwitcher;
+
 		public float speed = 600.0f;
 		public float turnSpeed = 400.0f;
 		public float gravity = -20.0f;
@@ -20,6 +22,10 @@ namespace AstronautPlayer
         public bool isOnGround;
 
         void Start () {
+			if (cameraSwitcher == null)
+			{
+				cameraSwitcher = FindObjectOfType<CameraSwitcher>();
+			}
 			controller = GetComponent <CharacterController>();
 			anim = gameObject.GetComponentInChildren<Animator>();
 		}
@@ -35,7 +41,17 @@ namespace AstronautPlayer
 	        isOnGround = controller.isGrounded;  // Update debug variable
     
 	        Vector3 moveDirection = Vector3.zero;
-	        moveDirection = transform.forward * (Input.GetAxis("Vertical") * speed);
+			float horizontal = Input.GetAxis("Horizontal");
+			float vertical = Input.GetAxis("Vertical");
+			moveDirection = transform.forward * vertical;
+
+            if (cameraSwitcher.isFirstPerson)
+            {
+				moveDirection = moveDirection + (transform.right * horizontal);
+            }
+
+            //apply the speed onto the movmenet
+            moveDirection = moveDirection * speed;
     
 	        // Combine vertical and gravity movement
 	        velocity.y += gravity * Time.deltaTime;
@@ -52,8 +68,11 @@ namespace AstronautPlayer
 		        anim.SetInteger("AnimationPar", 0);
 	        }
 
-	        float turn = Input.GetAxis("Horizontal");
-	        transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
+			//only if the player is in third person, rotate when there is horozontal movement
+			if (!cameraSwitcher.isFirstPerson)
+			{
+                transform.Rotate(0, horizontal * turnSpeed * Time.deltaTime, 0);
+            }
 
 	        // Perform jump after the move to ensure isGrounded is updated
 	        if (Input.GetButtonDown("Jump") && controller.isGrounded)

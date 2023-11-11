@@ -6,10 +6,13 @@ public class CameraSwitcher : MonoBehaviour
 {
     public Camera thirdPersonCamera;
     public Camera firstPersonCamera;
+
+    public bool isFirstPerson;
     
     // Start is called before the first frame update
     void Start()
     {
+        isFirstPerson = true;
         firstPersonCamera.enabled = true;
         thirdPersonCamera.enabled = false;
     }
@@ -22,6 +25,7 @@ public class CameraSwitcher : MonoBehaviour
             print("SWITCHED CAMS");
             thirdPersonCamera.enabled = !thirdPersonCamera.enabled;
             firstPersonCamera.enabled = !firstPersonCamera.enabled;
+            isFirstPerson = !isFirstPerson;
         }
     }
 }

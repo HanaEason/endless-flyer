@@ -6663,7 +6663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977d2b191ce333e47a6de2d4f1b612eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 400
+  sensitivity: 200
   playerBody: {fileID: 1087261511}
 --- !u!114 &932612744
 MonoBehaviour:
@@ -8429,6 +8429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thirdPersonCamera: {fileID: 932612746}
   firstPersonCamera: {fileID: 1464175901}
+  isFirstPerson: 0
 --- !u!1 &1094076690
 GameObject:
   m_ObjectHideFlags: 0
