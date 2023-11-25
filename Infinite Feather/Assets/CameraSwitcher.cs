@@ -7,6 +7,8 @@ public class CameraSwitcher : MonoBehaviour
     public Camera thirdPersonCamera;
     public Camera firstPersonCamera;
 
+    public AudioManager audioManager;
+    
     public bool isFirstPerson;
     
     // Start is called before the first frame update
@@ -22,6 +24,7 @@ public class CameraSwitcher : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
+            audioManager.PlayCamSwitch();
             print("SWITCHED CAMS");
             thirdPersonCamera.enabled = !thirdPersonCamera.enabled;
             firstPersonCamera.enabled = !firstPersonCamera.enabled;
