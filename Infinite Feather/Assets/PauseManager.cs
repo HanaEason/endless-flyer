@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
@@ -9,11 +10,19 @@ public class PauseManager : MonoBehaviour
     public static bool IsPaused = false;
     public AudioManager audioManager;
     private GameObject _pauseMenu;
+    
+    //get the textmeshpro buttons
+    public Button resumeButton;
+    public Button quitButton;
 
     private void Start()
     {
         _pauseMenu = GameObject.Find("PauseMenu");
         _pauseMenu.SetActive(false);
+        
+        //add the listeners
+        resumeButton.onClick.AddListener(TogglePauseGame);
+        quitButton.onClick.AddListener(QuitGame);
     }
 
     // Update is called once per frame
@@ -27,8 +36,6 @@ public class PauseManager : MonoBehaviour
 
     public void TogglePauseGame()
     {
-        //print debug message
-        print("PAUSED");
         if (IsPaused)
         {
             IsPaused = false;
