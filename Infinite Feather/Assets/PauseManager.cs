@@ -14,6 +14,10 @@ public class PauseManager : MonoBehaviour
     //get the textmeshpro buttons
     public Button resumeButton;
     public Button quitButton;
+    
+    //get the sliders
+    public Slider soundSlider;
+    public Slider musicSlider;
 
     private void Start()
     {
@@ -23,6 +27,10 @@ public class PauseManager : MonoBehaviour
         //add the listeners
         resumeButton.onClick.AddListener(TogglePauseGame);
         quitButton.onClick.AddListener(QuitGame);
+        
+        //add the listeners
+        soundSlider.onValueChanged.AddListener(audioManager.SetSoundVolume);
+        musicSlider.onValueChanged.AddListener(audioManager.SetMusicVolume);
     }
 
     // Update is called once per frame

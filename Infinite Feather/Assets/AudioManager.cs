@@ -5,28 +5,53 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     
-    private AudioSource _audioSource;
+    private AudioSource _soundEffectSource;
+    public AudioSource backgroundMusicSource;
+    
     public AudioClip[] audioClips;
+    public AudioClip backgroundMusic;
     
     // Start is called before the first frame update
     void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
+        _soundEffectSource = GetComponent<AudioSource>();
+        
+        //set the default volumes for the audio
+        SetSoundVolume(PlayerPrefs.GetFloat("SoundVolume", 1f));
+        SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume", 0.5f));
+        
+        //play the background music
+        backgroundMusicSource.clip = backgroundMusic;
+        backgroundMusicSource.Play();
+    }
+    
+    public void SetSoundVolume(float volume)
+    {
+        _soundEffectSource.volume = volume;
+        //save the volume to player prefs so it persists between sessions
+        PlayerPrefs.SetFloat("SoundVolume", volume);
+    }
+    
+    public void SetMusicVolume(float volume)
+    {
+        backgroundMusicSource.volume = volume;
+        //save the volume to player prefs so it persists between sessions
+        PlayerPrefs.SetFloat("MusicVolume", volume);
     }
     
     public void PlayCamSwitch()
     {
-        _audioSource.PlayOneShot(audioClips[0]);
+        _soundEffectSource.PlayOneShot(audioClips[0]);
     }
 
     public void PlayPause()
     {
-        _audioSource.PlayOneShot(audioClips[1]);
+        _soundEffectSource.PlayOneShot(audioClips[1]);
     }
 
     public void PlayUnpause()
     {
-        _audioSource.PlayOneShot(audioClips[2]);
+        _soundEffectSource.PlayOneShot(audioClips[2]);
     }
     
 }
