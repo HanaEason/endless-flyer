@@ -17,8 +17,6 @@ namespace Stylized_Astronaut.Character
         
         Vector3 velocity; //keeps track of the velocity of the player
         
-        //debugging
-        public bool isOnGround;
         private static readonly int AnimationPar = Animator.StringToHash("AnimationPar");
 
         void Start () {
@@ -42,8 +40,6 @@ namespace Stylized_Astronaut.Character
 	        {
 		        velocity.y = -2f;
 	        }
-
-	        isOnGround = _controller.isGrounded;  // Update debug variable
     
 	        Vector3 moveDirection = Vector3.zero;
 			float horizontal = Input.GetAxis("Horizontal");
@@ -63,9 +59,6 @@ namespace Stylized_Astronaut.Character
 	        moveDirection.y = velocity.y;
     
 	        _controller.Move(moveDirection * Time.deltaTime);
-
-	        // Check if grounded right after the move call to update status for the next frame
-	        isOnGround = _controller.isGrounded;  
     
 	        if (Input.GetKey("w")) {
 		        _anim.SetInteger(AnimationPar, 1);

@@ -48,6 +48,10 @@ public class PauseManager : MonoBehaviour
         {
             IsPaused = false;
             audioManager.PlayUnpause();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            
             //hide the pause menu
             _pauseMenu.SetActive(false);
         }
@@ -55,6 +59,10 @@ public class PauseManager : MonoBehaviour
         {
             IsPaused = true;
             audioManager.PlayPause();
+            
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            
             //show the pause menu
             _pauseMenu.SetActive(true);
         }

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
@@ -8,13 +5,15 @@ public class FirstPersonCamera : MonoBehaviour
     public float sensitivity = 100f;
     public Transform playerBody;
 
-    float _xRotation = 0f;
+    private float _xRotation;
     
     // Start is called before the first frame update
     void Start()
     {
-        // Cursor.lockState = CursorLockMode.Locked;
-        // Cursor.visible = false;
+        _xRotation = 0.0f;
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

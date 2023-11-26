@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace AstronautThirdPersonCamera
+namespace Stylized_Astronaut.Character
 {
 
   public class AstronautThirdPersonCamera : MonoBehaviour
@@ -26,8 +24,8 @@ namespace AstronautThirdPersonCamera
 
     private void Update()
     {
-        currentX += Input.GetAxis("Mouse X");
-        currentY += Input.GetAxis("Mouse Y");
+        currentX += Input.GetAxis("Mouse X") * sensitivityX * Time.deltaTime;
+        currentY -= Input.GetAxis("Mouse Y") * sensitivityY * Time.deltaTime;
 
         currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
     }
