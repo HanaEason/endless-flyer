@@ -25,7 +25,7 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    void TogglePauseGame()
+    public void TogglePauseGame()
     {
         //print debug message
         print("PAUSED");
@@ -47,6 +47,7 @@ public class PauseManager : MonoBehaviour
     
     void QuitGame()
     {
+        print("QUIT");
         Application.Quit();
     }
     
