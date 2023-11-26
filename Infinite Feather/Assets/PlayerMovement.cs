@@ -22,7 +22,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (PauseManager.IsPaused)
+        {
+            return;
+        }
+        
         //Make a sphere that checks to see if the player is making contact with the ground
         isOnGround = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -38,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
         
         // move the player
-        controller.Move(move * speed * Time.deltaTime); // deltaTime makes it frame rate independent
+        controller.Move(move * (speed * Time.deltaTime)); // deltaTime makes it frame rate independent
 
         if(Input.GetButtonDown("Jump") && isOnGround)
         {

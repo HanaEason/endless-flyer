@@ -8,12 +8,12 @@ public class PauseManager : MonoBehaviour
 
     public static bool IsPaused = false;
     public AudioManager audioManager;
-    private GameObject pauseMenu;
+    private GameObject _pauseMenu;
 
     private void Start()
     {
-        pauseMenu = GameObject.Find("PauseMenu");
-        pauseMenu.SetActive(false);
+        _pauseMenu = GameObject.Find("PauseMenu");
+        _pauseMenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -27,20 +27,27 @@ public class PauseManager : MonoBehaviour
 
     void TogglePauseGame()
     {
+        //print debug message
+        print("PAUSED");
         if (IsPaused)
         {
             IsPaused = false;
             audioManager.PlayUnpause();
             //hide the pause menu
-            pauseMenu.SetActive(false);
+            _pauseMenu.SetActive(false);
         }
         else
         {
             IsPaused = true;
             audioManager.PlayPause();
             //show the pause menu
-            pauseMenu.SetActive(true);
+            _pauseMenu.SetActive(true);
         }
+    }
+    
+    void QuitGame()
+    {
+        Application.Quit();
     }
     
 }
