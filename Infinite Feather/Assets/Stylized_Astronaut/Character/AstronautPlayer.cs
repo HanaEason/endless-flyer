@@ -11,6 +11,7 @@ namespace Stylized_Astronaut.Character
 		private CameraSwitcher _cameraSwitcher;
 
 		public float speed = 600.0f;
+		public float runSpeed = 900.0f;
 		public float turnSpeed = 400.0f;
 		public float gravity = -20.0f;
         public float jumpHeight = 3.0f;
@@ -51,8 +52,15 @@ namespace Stylized_Astronaut.Character
 				moveDirection += (transform.right * horizontal);
             }
 
-            //apply the speed onto the movmenet
-            moveDirection *= speed;
+            //apply the speed onto the movement
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+	            moveDirection *= runSpeed;
+            }
+            else
+            {
+	            moveDirection *= speed;
+            }
     
 	        // Combine vertical and gravity movement
 	        velocity.y += gravity * Time.deltaTime;
