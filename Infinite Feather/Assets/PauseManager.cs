@@ -54,6 +54,7 @@ public class PauseManager : MonoBehaviour
             
             //hide the pause menu
             _pauseMenu.SetActive(false);
+            Time.timeScale = 1;
         }
         else
         {
@@ -65,6 +66,7 @@ public class PauseManager : MonoBehaviour
             
             //show the pause menu
             _pauseMenu.SetActive(true);
+            Time.timeScale = 0;
         }
     }
     
