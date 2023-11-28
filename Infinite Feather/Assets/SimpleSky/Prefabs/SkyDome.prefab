@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 400010}
   - component: {fileID: 3300006}
   - component: {fileID: 2300006}
+  - component: {fileID: 8911108037788156804}
   m_Layer: 0
   m_Name: SkyDome
   m_TagString: Untagged
@@ -399,3 +400,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8911108037788156804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c816e28e9dcc4d84eb6cb52f37098bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
