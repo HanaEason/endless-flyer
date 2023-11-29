@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+
 public class dometime : MonoBehaviour
 {
     // Scroll main texture based on time
