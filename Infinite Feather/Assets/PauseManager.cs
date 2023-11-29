@@ -1,3 +1,4 @@
+using Stylized_Astronaut.Character;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,7 @@ public class PauseManager : MonoBehaviour
 
     public static bool IsPaused = false;
     public AudioManager audioManager;
+    public AstronautPlayer astronautPlayer;
     private GameObject _pauseMenu;
     private GameObject _endScreen;
     
@@ -16,6 +18,7 @@ public class PauseManager : MonoBehaviour
     //get the sliders
     public Slider soundSlider;
     public Slider musicSlider;
+    public Slider gravitySlider;
 
     private void Start()
     {
@@ -31,6 +34,7 @@ public class PauseManager : MonoBehaviour
         //add the listeners
         soundSlider.onValueChanged.AddListener(audioManager.SetSoundVolume);
         musicSlider.onValueChanged.AddListener(audioManager.SetMusicVolume);
+        gravitySlider.onValueChanged.AddListener(astronautPlayer.SetGravity);
     }
 
     // Update is called once per frame

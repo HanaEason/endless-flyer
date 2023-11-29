@@ -28,6 +28,12 @@ namespace Stylized_Astronaut.Character
 			_controller = GetComponent <CharacterController>();
 			_anim = gameObject.GetComponentInChildren<Animator>();
 		}
+        
+        public void SetGravity(float newGravity)
+		{
+			//apply gravity multiplier
+			gravity = -1 * newGravity;
+		}
 
         void Update (){
     
@@ -45,6 +51,7 @@ namespace Stylized_Astronaut.Character
 	        Vector3 moveDirection = Vector3.zero;
 			float horizontal = Input.GetAxis("Horizontal");
 			float vertical = Input.GetAxis("Vertical");
+			
 			moveDirection = transform.forward * vertical;
 
             if (_cameraSwitcher.isFirstPerson)
@@ -62,10 +69,12 @@ namespace Stylized_Astronaut.Character
 	            moveDirection *= speed;
             }
     
-	        // Combine vertical and gravity movement
+	        // Apply the gravity onto the current velocity
 	        velocity.y += gravity * Time.deltaTime;
+	        // Apply the velocity onto the movement vector
 	        moveDirection.y = velocity.y;
     
+	        // Move the player
 	        _controller.Move(moveDirection * Time.deltaTime);
     
 	        if (Input.GetKey("w")) {
@@ -83,7 +92,7 @@ namespace Stylized_Astronaut.Character
 	        // Perform jump after the move to ensure isGrounded is updated
 	        if (Input.GetButtonDown("Jump") && _controller.isGrounded && !PauseManager.IsPaused)
 	        {
-		        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+		        velocity.y = jumpHeight;
 	        }
         }
 
