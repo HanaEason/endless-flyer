@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +7,7 @@ public class PauseManager : MonoBehaviour
     public static bool IsPaused = false;
     public AudioManager audioManager;
     private GameObject _pauseMenu;
+    private GameObject _endScreen;
     
     //get the textmeshpro buttons
     public Button resumeButton;
@@ -23,6 +21,8 @@ public class PauseManager : MonoBehaviour
     {
         _pauseMenu = GameObject.Find("PauseMenu");
         _pauseMenu.SetActive(false);
+        _endScreen = GameObject.Find("EndScreen");
+        _endScreen.SetActive(false);
         
         //add the listeners
         resumeButton.onClick.AddListener(TogglePauseGame);
@@ -66,6 +66,14 @@ public class PauseManager : MonoBehaviour
             //show the pause menu
             _pauseMenu.SetActive(true);
         }
+    }
+    
+    public void ShowEndScreen()
+    {
+        IsPaused = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        _endScreen.SetActive(true);
     }
     
     void QuitGame()
