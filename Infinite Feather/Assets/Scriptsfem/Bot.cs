@@ -63,14 +63,16 @@ public class Bot : MonoBehaviour {
 
     void Wander() {
 
-        float wanderRadius = 10.0f;
-        float wanderDistance = 20.0f;
-        float wanderJitter = 1.0f;
+        float wanderRadius = 7.0f;
+        float wanderDistance = 14.0f;
+        float wanderJitter = 2.0f;
 
         wanderTarget += new Vector3(
             Random.Range(-1.0f, 1.0f) * wanderJitter,
             0.0f,
             Random.Range(-1.0f, 1.0f));
+
+        //push out to right length
         wanderTarget.Normalize();
         wanderTarget *= wanderRadius;
 
