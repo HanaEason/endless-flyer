@@ -28,6 +28,11 @@ namespace Stylized_Astronaut.Character
 			_controller = GetComponent <CharacterController>();
 			_anim = gameObject.GetComponentInChildren<Animator>();
 		}
+
+		//a method to get the position of the player
+        public Vector3 GetPosition(){
+            return transform.position;
+        }
         
         public void SetGravity(float newGravity)
 		{
