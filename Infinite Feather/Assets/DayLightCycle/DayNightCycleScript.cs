@@ -10,7 +10,7 @@ public class DayNightCycleScript : MonoBehaviour
 
     [SerializeField] private float rotationSpeed;
     
-    [SerializeField] private Gradient sunColor;
+    [SerializeField] private Gradient shadeColor;
 
     private void UpdateRotation(){
         float theta = time/24.0f;
@@ -22,7 +22,7 @@ public class DayNightCycleScript : MonoBehaviour
     private void UpdateLighting(){
         float timeComponent = time/24.0f;
        
-        sun.color = sunColor.Evaluate(timeComponent);
+        sun.color = shadeColor.Evaluate(timeComponent);
     }
    
     // Update is called once per frame
