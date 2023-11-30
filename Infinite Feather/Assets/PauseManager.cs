@@ -14,6 +14,7 @@ public class PauseManager : MonoBehaviour
     //get the textmeshpro buttons
     public Button resumeButton;
     public Button quitButton;
+    public Button endQuitButton; //button for the end screen
     
     //get the sliders
     public Slider soundSlider;
@@ -30,6 +31,7 @@ public class PauseManager : MonoBehaviour
         //add the listeners
         resumeButton.onClick.AddListener(TogglePauseGame);
         quitButton.onClick.AddListener(QuitGame);
+        endQuitButton.onClick.AddListener(QuitGame);
         
         //add the listeners
         soundSlider.onValueChanged.AddListener(audioManager.SetSoundVolume);

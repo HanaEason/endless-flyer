@@ -59,6 +59,7 @@ namespace Stylized_Astronaut.Character
 			
 			moveDirection = transform.forward * vertical;
 
+			//only if the player is in first person, move left and right
             if (_cameraSwitcher.isFirstPerson)
             {
 				moveDirection += (transform.right * horizontal);
@@ -97,7 +98,7 @@ namespace Stylized_Astronaut.Character
 	        // Perform jump after the move to ensure isGrounded is updated
 	        if (Input.GetButtonDown("Jump") && _controller.isGrounded && !PauseManager.IsPaused)
 	        {
-		        velocity.y = jumpHeight;
+		        velocity.y += jumpHeight;
 	        }
         }
 
