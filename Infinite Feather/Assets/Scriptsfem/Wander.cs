@@ -50,8 +50,8 @@ public class Wander : MonoBehaviour
 	/// </summary>
 	void NewHeadingRoutine ()
 	{
-		var floor = transform.eulerAngles.y - maxHeadingChange;
-		var ceil  = transform.eulerAngles.y + maxHeadingChange;
+		var floor = transform.eulerAngles.x - maxHeadingChange;
+		var ceil  = transform.eulerAngles.x + maxHeadingChange;
 		heading = Random.Range(floor, ceil);
 		targetRotation = new Vector3(0, heading, 0);
 	}
