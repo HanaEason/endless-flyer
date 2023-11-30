@@ -10,8 +10,6 @@ public class DayNightCycleScript : MonoBehaviour
 
     [SerializeField] private float rotationSpeed;
     
-    //[SerializeField] private Gradient skyColor;
-    //[SerializeField] private Gradient equatorColor;
     [SerializeField] private Gradient sunColor;
 
     private void UpdateRotation(){
@@ -23,8 +21,7 @@ public class DayNightCycleScript : MonoBehaviour
 
     private void UpdateLighting(){
         float timeComponent = time/24.0f;
-        //RenderSettings.ambientEquatorColor = equatorColor.Evaluate(timeComponent);
-        //RenderSettings.ambientSkyColor = skyColor.Evaluate(timeComponent);
+       
         sun.color = sunColor.Evaluate(timeComponent);
     }
    
