@@ -1,42 +1,64 @@
 using UnityEngine;
 using System.Collections;
- 
-public class WanderingAI : MonoBehaviour {
- 
-    public float wanderRadius;
-    public float wanderTimer;
- 
-    private Transform target;
-    private UnityEngine.AI.NavMeshAgent agent;
-    private float timer;
- 
-    // Use this for initialization
-    void OnEnable () {
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent> ();
-        timer = wanderTimer;
-    }
- 
-    // Update is called once per frame
-    void Update () {
-        timer += Time.deltaTime;
- 
-        if (timer >= wanderTimer) {
-            Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
-            agent.SetDestination(newPos);
-            timer = 0;
-        }
-    }
- 
-    public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask) {
-        Vector3 randDirection = Random.insideUnitSphere * dist;
- 
-        randDirection += origin;
- 
-        UnityEngine.AI.NavMeshHit navHit;
- 
-        UnityEngine.AI.NavMesh.SamplePosition (randDirection, out navHit, dist, layermask);
- 
-        return navHit.position;
-    }
+
+/// <summary>
+/// Creates wandering behaviour for a CharacterController.
+/// </summary>
+[RequireComponent(typeof(CharacterController))]
+public class Wander : MonoBehaviour
+{
+	public float speed = 5;
+	public float directionChangeInterval = 1;
+	public float maxHeadingChange = 30;
+
+	CharacterController controller;
+	float heading;
+	Vector3 targetRotation;
+
+	void Awake ()
+	{
+		controller = GetComponent<CharacterController>();
+
+		// Set random initial rotation
+		heading = Random.Range(0, 360);
+		transform.eulerAngles = new Vector3(0, heading, 0);
+
+		StartCoroutine(NewHeading());
+	}
+
+	void Update ()
+	{
+		transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * directionChangeInterval);
+		var forward = transform.TransformDirection(Vector3.forward);
+		controller.SimpleMove(forward * speed);
+	}
+
+	/// <summary>
+	/// Repeatedly calculates a new direction to move towards.
+	/// Use this instead of MonoBehaviour.InvokeRepeating so that the interval can be changed at runtime.
+	/// </summary>
+	IEnumerator NewHeading ()
+	{
+		while (true) {
+			NewHeadingRoutine();
+			yield return new WaitForSeconds(directionChangeInterval);
+		}
+	}
+
+	/// <summary>
+	/// Calculates a new direction to move towards.
+	/// </summary>
+	void NewHeadingRoutine ()
+	{
+		var floor = transform.eulerAngles.y - maxHeadingChange;
+		var ceil  = transform.eulerAngles.y + maxHeadingChange;
+		heading = Random.Range(floor, ceil);
+		targetRotation = new Vector3(0, heading, 0);
+	}
+
+    void OnTriggerEnter( Collider collider )
+	//void OnCollisionEnter( Collision collision )
+	{
+		NewHeadingRoutine();
+	}
 }
- 
